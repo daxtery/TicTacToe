@@ -24,7 +24,6 @@ public final class ClickHandler implements MouseListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        /* TODO mouse */
     }
 
     @Override

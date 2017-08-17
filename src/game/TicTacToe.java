@@ -22,9 +22,10 @@ public final class TicTacToe {
     private static JMenu newGame;
 
     //GAME STUFF
-    private int oWins = 0;
-    private int xWins = 0;
+    private int p2Wins = 0;
+    private int p1Wins = 0;
     private Owner currentPlayer = Owner.X;
+    private int whoseTurn = 0;
 
     private static ArrayList<int[]> possible_wins;
 
@@ -32,6 +33,11 @@ public final class TicTacToe {
     private final int COLUMNS = 3;
     private final int LINES = 3;
     private Tile[] tileArray = new Tile[COLUMNS*LINES];
+
+    //PLAYERS
+
+    private String p1;
+    private String p2;
 
     public static void main(String[] args){
         TicTacToe t = new TicTacToe();
@@ -92,6 +98,14 @@ public final class TicTacToe {
     }
 
     private TicTacToe(){
+        p1 = JOptionPane.showInputDialog("Player 1's name?");
+        p2 = JOptionPane.showInputDialog("Player 2's name?");
+        if(p1 == null || p1.equalsIgnoreCase("")){
+            p1 = "John";
+        }
+        if(p2 == null || p2.equalsIgnoreCase("")){
+            p2 = "Doe";
+        }
         waysToWin();
         doTiles();
         buildFrame();
@@ -157,6 +171,8 @@ public final class TicTacToe {
         GAME_FRAME.setVisible(true);
         GAME_FRAME.setJMenuBar(menuBar);
         GAME_FRAME.pack(); // Pack all the changes.
+        Font font = new Font("Papyrus", Font.PLAIN, 20);
+        UIManager.put("OptionPane.messageFont", font);
 
     }
 
@@ -190,15 +206,22 @@ public final class TicTacToe {
         }
     }
 
+    private String determineWhoWon(){
+        if(whoseTurn == 0){
+            return p1;
+        }
+        return p2;
+    }
+
     private void sendWin(Owner currentPlayer) {
         if(currentPlayer == Owner.O){
-            oWins++;
+            p2Wins++;
         }
         else{
-            xWins++;
+            p1Wins++;
         }
-        String message = String.format("%s won the game! Score is: X - %d vs O - %d",
-                currentPlayer, xWins, oWins);
+        String message = String.format("%s won the game! Score is: \n%s  ==> %d \n%s  ==> %d",determineWhoWon(),
+                p1, p1Wins, p2, p2Wins);
         JOptionPane.showMessageDialog(GAME_FRAME,message);
         newGame();
     }
@@ -245,7 +268,7 @@ public final class TicTacToe {
     }
 
     private void sendDraw() {
-        String message = String.format("It\'s a Draw! Score is: X - %d vs O - %d", xWins, oWins);
+        String message = String.format("It\'s a Draw! Score is: \n%s  ==> %d \n%s  ==> %d",p1, p1Wins, p2,  p2Wins);
         JOptionPane.showMessageDialog(GAME_FRAME, message);
         newGame();
     }
@@ -261,6 +284,12 @@ public final class TicTacToe {
 
     private void nextTurn(){
         currentPlayer = currentPlayer.getOpposite();
+        if(whoseTurn == 0){
+            whoseTurn++;
+        }
+        else {
+            whoseTurn = 0;
+        }
     }
 
     private boolean checkBounds(int x, int y) {

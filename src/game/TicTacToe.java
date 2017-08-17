@@ -198,8 +198,8 @@ public final class TicTacToe {
     }
 
     private boolean won(Owner currentPlayer) {
-        System.out.println();
-        System.out.println("NEW MOVE");
+//        System.out.println();
+//        System.out.println("NEW MOVE");
         int[] captures = capturedTilesFor(currentPlayer);
         for(int[] way : possible_wins){
             if(winningArray(captures, way)){
@@ -210,12 +210,12 @@ public final class TicTacToe {
     }
 
     private boolean winningArray(int[]have, int[]need){
-        System.out.println();
-        System.out.println("NEW ARRAY");
+//        System.out.println();
+//        System.out.println("NEW ARRAY");
         for(int i = 0; i < have.length; i++){
             int hav = have[i];
             int ned = need[i];
-            System.out.println("Board: " + hav + " == " + "Needed: " + ned );
+            //System.out.println("Board: " + hav + " == " + "Needed: " + ned );
             if(ned == 1 && hav == 0){
                 return false;
             }
@@ -241,6 +241,7 @@ public final class TicTacToe {
     private void sendDraw() {
         String message = String.format("It\'s a Draw! Score is: X - %d vs O - %d", xWins, oWins);
         JOptionPane.showMessageDialog(GAME_FRAME, message);
+        newGame();
     }
 
     private boolean allFull() {
@@ -257,6 +258,6 @@ public final class TicTacToe {
     }
 
     private boolean checkBounds(int x, int y) {
-        return (x >= BORDER && y >= BORDER) &&(x <= Tile.WIDTH * COLUMNS + BORDER && y <= Tile.HEIGHT*LINES + BORDER);
+        return (x > BORDER && y > BORDER) &&(x < Tile.WIDTH * COLUMNS + BORDER && y < Tile.HEIGHT*LINES + BORDER);
     }
 }

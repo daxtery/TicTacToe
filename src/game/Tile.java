@@ -37,7 +37,7 @@ public final class Tile {
     }
 
     void paint(Graphics g){
-        System.out.printf("Drawing a tile at x:%d y:%d \nThe owner is %s and it's color is %s\n", getX(), getY(), getOwner().name(), getOwner().getColor().toString());
+        //System.out.printf("Drawing a tile at x:%d y:%d \nThe owner is %s and it's color is %s\n", getX(), getY(), getOwner().name(), getOwner().getColor().toString());
         g.setColor(owner.getColor());
         g.fillRect(x, y, WIDTH, HEIGHT);
         g.setColor(owner.getTextColor());

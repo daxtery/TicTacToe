@@ -19,8 +19,7 @@ public final class ClickHandler implements MouseListener{
     public void mousePressed(MouseEvent e) {
         System.out.println("x: " + e.getX());
         System.out.println("y: " + e.getY());
-        //game.attemptClaim(e.getX() - 3, e.getY() - 26); // Subtracts from the values to eliminate interference from the frame border.
-        //game.getGAME_FRAME().repaint();
+        game.attemptClaim(e.getX() - 3, e.getY() - 26); // Subtracts from the values to eliminate interference from the frame border.
     }
 
     @Override

@@ -161,8 +161,12 @@ public final class TicTacToe {
     }
 
     private void claim(int index){
-        tileArray[index].capture(currentPlayer);
-        GAME_FRAME.repaint();
+        Boolean changeTurn = false;
+        if(!tileArray[index].isCaptured()){
+            tileArray[index].capture(currentPlayer);
+            GAME_FRAME.repaint();
+            changeTurn = true;
+        }
         if(won(currentPlayer)){
             sendWin(currentPlayer);
             return;
@@ -171,7 +175,9 @@ public final class TicTacToe {
             //draw
             sendDraw();
         }
-        nextTurn();
+        if(changeTurn){
+            nextTurn();
+        }
     }
 
     void attemptClaim(int x, int y) {

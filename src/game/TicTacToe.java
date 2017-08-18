@@ -20,6 +20,7 @@ public final class TicTacToe {
     final static int BORDER = 60;
     private static JMenuBar menuBar;
     private static JMenu newGame;
+    private static JMenu vsAI;
 
     //GAME STUFF
     private int p2Wins = 0;
@@ -31,6 +32,7 @@ public final class TicTacToe {
     private boolean ai = false;
     private boolean aiTurn = false;
     private AI theAI;
+    private static final String pcName = "PC";
 
     private static ArrayList<int[]> possible_wins;
 
@@ -43,6 +45,7 @@ public final class TicTacToe {
 
     private String p1;
     private String p2;
+    private String orip2;
 
     public static void main(String[] args){
         //TicTacToe t = new TicTacToe();
@@ -118,6 +121,11 @@ public final class TicTacToe {
     }
 
     private TicTacToe(int i){
+        p1 = JOptionPane.showInputDialog("Player 1's name?");
+        if(p2 == null || p2.equalsIgnoreCase("")){
+            p2 = "Doe";
+        }
+        p2 = "PC";
         waysToWin();
         doTiles();
         buildFrame();
@@ -126,6 +134,15 @@ public final class TicTacToe {
     }
 
     private void newGame() {
+        if(ai){
+            currentPlayer = Owner.X;
+            playerTurn = 0;
+        }
+        else{
+            if(p2.equalsIgnoreCase(pcName)){
+                p2 = JOptionPane.showInputDialog("Player 2's name?");
+            }
+        }
         resetTiles();
         GAME_FRAME.repaint();
     }
@@ -162,6 +179,7 @@ public final class TicTacToe {
         newGame.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
+                ai = false;
                 newGame();
             }
 
@@ -174,6 +192,25 @@ public final class TicTacToe {
             }
         });
         menuBar.add(newGame);
+
+        vsAI = new JMenu("Start new game vs PC");
+        vsAI.addMenuListener(new MenuListener() {
+            @Override
+            public void menuSelected(MenuEvent e) {
+                p2 = "PC";
+                ai = true;
+                newGame();
+            }
+
+            @Override
+            public void menuDeselected(MenuEvent e) {
+            }
+
+            @Override
+            public void menuCanceled(MenuEvent e) {
+            }
+        });
+        menuBar.add(vsAI);
 
         GAME_FRAME.addMouseListener(CLICK_HANDLER);
         GAME_FRAME.setSize(FRAME_DIM);

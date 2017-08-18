@@ -28,9 +28,6 @@ final class AI {
             }
             i++;
         }
-        for(int iii : freeTiles.stream().mapToInt(ii -> ii).toArray()){
-            System.out.println(iii);
-        }
         return freeTiles.stream().mapToInt(ii -> ii).toArray();
     }
 

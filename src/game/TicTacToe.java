@@ -5,6 +5,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public final class TicTacToe {
 
@@ -45,7 +46,7 @@ public final class TicTacToe {
 
     private String p1;
     private String p2;
-    private String orip2;
+    private static final String[] tempNames = new String[]{"John", "Mike", "Kate", "Got no name"} ;
 
     public static void main(String[] args){
         //TicTacToe t = new TicTacToe();
@@ -106,25 +107,24 @@ public final class TicTacToe {
 
     }
 
+    private String askPlayerName(){
+        String tempName = JOptionPane.showInputDialog("Player name?");
+        if(tempName == null || tempName.equalsIgnoreCase("")){
+            tempName = tempNames[new Random().nextInt(tempNames.length)];
+        }
+        return tempName;
+    }
+
     private TicTacToe(){
-        p1 = JOptionPane.showInputDialog("Player 1's name?");
-        p2 = JOptionPane.showInputDialog("Player 2's name?");
-        if(p1 == null || p1.equalsIgnoreCase("")){
-            p1 = "John";
-        }
-        if(p2 == null || p2.equalsIgnoreCase("")){
-            p2 = "Doe";
-        }
+        p1 = askPlayerName();
+        p2 = askPlayerName();
         waysToWin();
         doTiles();
         buildFrame();
     }
 
     private TicTacToe(int i){
-        p1 = JOptionPane.showInputDialog("Player 1's name?");
-        if(p2 == null || p2.equalsIgnoreCase("")){
-            p2 = "Doe";
-        }
+        p1 = askPlayerName();
         p2 = "PC";
         waysToWin();
         doTiles();
@@ -133,15 +133,25 @@ public final class TicTacToe {
         ai = true;
     }
 
-    private void newGame() {
-        if(ai){
-            currentPlayer = Owner.X;
+    private void newAIGame(){
+        resetTiles();
+        if(playerTurn == 1){
+            theAI.play();
             playerTurn = 0;
         }
-        else{
-            if(p2.equalsIgnoreCase(pcName)){
-                p2 = JOptionPane.showInputDialog("Player 2's name?");
-            }
+        if(!p2.equalsIgnoreCase(pcName)){
+            p1Wins = 0;
+            p2Wins = 0;
+            p2 = "PC";
+        }
+        GAME_FRAME.repaint();
+    }
+
+    private void newGame() {
+        if(p2.equalsIgnoreCase(pcName)){
+            p1Wins = 0;
+            p2Wins = 0;
+            p2 = askPlayerName();
         }
         resetTiles();
         GAME_FRAME.repaint();
@@ -197,9 +207,8 @@ public final class TicTacToe {
         vsAI.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
-                p2 = "PC";
                 ai = true;
-                newGame();
+                newAIGame();
             }
 
             @Override
@@ -274,6 +283,10 @@ public final class TicTacToe {
         String message = String.format("%s won the game! Score is: \n%s  ==> %d \n%s  ==> %d",determineWhoWon(),
                 p1, p1Wins, p2, p2Wins);
         JOptionPane.showMessageDialog(GAME_FRAME,message);
+        if(ai){
+            newAIGame();
+            return;
+        }
         newGame();
     }
 
@@ -321,6 +334,10 @@ public final class TicTacToe {
     private void sendDraw() {
         String message = String.format("It\'s a Draw! Score is: \n%s  ==> %d \n%s  ==> %d",p1, p1Wins, p2,  p2Wins);
         JOptionPane.showMessageDialog(GAME_FRAME, message);
+        if(ai){
+            newAIGame();
+            return;
+        }
         newGame();
     }
 

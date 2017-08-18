@@ -297,21 +297,16 @@ public final class TicTacToe {
     }
 
     private void nextTurn(){
-       if(ai){
-           if(aiTurn){
-               theAI.play();
-           }
-           aiTurn = !aiTurn;
-       }
-        else {
-            if(playerTurn == 1){
-                playerTurn = 0;
-            }
-            else{
-                playerTurn++;
+        currentPlayer = currentPlayer.getOpposite();
+        if(playerTurn == 0){
+            playerTurn++;
+            if(ai){
+                theAI.play();
             }
         }
-        currentPlayer = currentPlayer.getOpposite();
+        else{
+            playerTurn = 0;
+        }
     }
 
     private boolean checkBounds(int x, int y) {

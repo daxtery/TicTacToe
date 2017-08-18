@@ -24,8 +24,13 @@ public final class TicTacToe {
     //GAME STUFF
     private int p2Wins = 0;
     private int p1Wins = 0;
+
     private Owner currentPlayer = Owner.X;
-    private int whoseTurn = 0;
+    private int playerTurn = 0;
+
+    private boolean ai = false;
+    private boolean aiTurn = false;
+    private AI theAI;
 
     private static ArrayList<int[]> possible_wins;
 
@@ -40,8 +45,9 @@ public final class TicTacToe {
     private String p2;
 
     public static void main(String[] args){
-        TicTacToe t = new TicTacToe();
+        //TicTacToe t = new TicTacToe();
         //t.newGame();
+        TicTacToe t = new TicTacToe(1);
     }
 
     private void waysToWin(){
@@ -111,6 +117,14 @@ public final class TicTacToe {
         buildFrame();
     }
 
+    private TicTacToe(int i){
+        waysToWin();
+        doTiles();
+        buildFrame();
+        theAI = new AI(this);
+        ai = true;
+    }
+
     private void newGame() {
         resetTiles();
         GAME_FRAME.repaint();
@@ -176,7 +190,7 @@ public final class TicTacToe {
 
     }
 
-    private void claim(int index){
+    void claim(int index){
         Boolean changeTurn = false;
         if(!tileArray[index].isCaptured()){
             tileArray[index].capture(currentPlayer);
@@ -207,7 +221,7 @@ public final class TicTacToe {
     }
 
     private String determineWhoWon(){
-        if(whoseTurn == 0){
+        if(playerTurn == 0){
             return p1;
         }
         return p2;
@@ -283,13 +297,21 @@ public final class TicTacToe {
     }
 
     private void nextTurn(){
-        currentPlayer = currentPlayer.getOpposite();
-        if(whoseTurn == 0){
-            whoseTurn++;
-        }
+       if(ai){
+           if(aiTurn){
+               theAI.play();
+           }
+           aiTurn = !aiTurn;
+       }
         else {
-            whoseTurn = 0;
+            if(playerTurn == 1){
+                playerTurn = 0;
+            }
+            else{
+                playerTurn++;
+            }
         }
+        currentPlayer = currentPlayer.getOpposite();
     }
 
     private boolean checkBounds(int x, int y) {

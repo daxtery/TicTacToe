@@ -107,8 +107,8 @@ public final class TicTacToe {
 
     }
 
-    private String askPlayerName(){
-        String tempName = JOptionPane.showInputDialog("Player name?");
+    private String askPlayerName(String q){
+        String tempName = JOptionPane.showInputDialog(q);
         if(tempName == null || tempName.equalsIgnoreCase("")){
             tempName = tempNames[new Random().nextInt(tempNames.length)];
         }
@@ -116,15 +116,15 @@ public final class TicTacToe {
     }
 
     private TicTacToe(){
-        p1 = askPlayerName();
-        p2 = askPlayerName();
+        p1 = askPlayerName("Player 1's name?");
+        p2 = askPlayerName("Player 2's name?");
         waysToWin();
         doTiles();
         buildFrame();
     }
 
     private TicTacToe(int i){
-        p1 = askPlayerName();
+        p1 = askPlayerName("Player 1's name?");
         p2 = "PC";
         waysToWin();
         doTiles();
@@ -151,7 +151,7 @@ public final class TicTacToe {
         if(p2.equalsIgnoreCase(pcName)){
             p1Wins = 0;
             p2Wins = 0;
-            p2 = askPlayerName();
+            p2 = askPlayerName("Player 2's name?");
         }
         resetTiles();
         GAME_FRAME.repaint();

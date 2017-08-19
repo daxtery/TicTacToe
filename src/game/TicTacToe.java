@@ -137,7 +137,6 @@ public final class TicTacToe {
         resetTiles();
         if(playerTurn == 1){
             theAI.play();
-            playerTurn = 0;
         }
         if(!p2.equalsIgnoreCase(pcName)){
             p1Wins = 0;
@@ -250,6 +249,7 @@ public final class TicTacToe {
         if(allFull()){
             //draw
             sendDraw();
+            return;
         }
         if(changeTurn){
             nextTurn();

@@ -32,7 +32,7 @@ public final class TicTacToe {
     private int p2Wins = 0;
     private int p1Wins = 0;
 
-    private Owner currentPlayer = Owner.X;
+    private Owner currentPlayer = new Owner();
     private int playerTurn = 0;
 
     private boolean ai = false;
@@ -262,7 +262,7 @@ public final class TicTacToe {
     }
 
     private void sendWin(Owner currentPlayer) {
-        if (currentPlayer == Owner.O) {
+        if (currentPlayer.ownerType == OwnerType.O) {
             p2Wins++;
         } else {
             p1Wins++;
@@ -338,7 +338,7 @@ public final class TicTacToe {
     }
 
     private void nextTurn() {
-        currentPlayer = currentPlayer.getOpposite();
+        currentPlayer = new Owner();
         if (playerTurn == 0) {
             playerTurn++;
             if (ai) {

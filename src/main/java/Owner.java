@@ -1,10 +1,11 @@
 import java.awt.*;
 
-public enum Owner {
-    X, O, NEUTRAL;
+class Owner {
+
+    OwnerType ownerType;
 
     public String getText() {
-        switch (this) {
+        switch (ownerType) {
         case X:
             return "X";
         case O:
@@ -14,20 +15,20 @@ public enum Owner {
         }
     }
 
-    public Owner getOpposite() { // Get the opposite of this Enum. If it was X, then the opposite is O, and
-                                 // likewise.
-        switch (this) {
+    public OwnerType getOpposite() { // Get the opposite of this Enum. If it was X, then the opposite is O, and
+        // likewise.
+        switch (ownerType) {
         case X:
-            return O;
+            return OwnerType.O;
         case O:
-            return X;
+            return OwnerType.X;
         default:
-            return NEUTRAL;
+            return OwnerType.EMPTY;
         }
     }
 
     public Color getColor() { // Get the background color to color the Tile.
-        switch (this) {
+        switch (ownerType) {
         // case X:
         // return Color.LIGHT_GRAY;
         // case O:
@@ -38,7 +39,7 @@ public enum Owner {
     }
 
     public Color getTextColor() { // Get the color to make the text of the Tile.
-        switch (this) {
+        switch (ownerType) {
         case X:
             return Color.BLACK;
         case O:

@@ -8,7 +8,7 @@ public final class Tile {
     static final int WIDTH = 120;
     static final int HEIGHT = 120;
 
-    private Owner owner = Owner.NEUTRAL;
+    private Owner owner = new Owner();
     private boolean captured = false;
 
     Tile(int _x, int _y, TicTacToe _game) {
@@ -21,7 +21,7 @@ public final class Tile {
     }
 
     public void capture(Owner newOwner) {
-        if (!captured && owner == Owner.NEUTRAL) {
+        if (!captured && owner.ownerType == OwnerType.EMPTY) {
             captured = true;
             owner = newOwner;
         }
@@ -44,7 +44,7 @@ public final class Tile {
     }
 
     void reset() { // Used to reset this Tile after the game is over.
-        owner = Owner.NEUTRAL;
+        owner.ownerType = OwnerType.EMPTY;
         captured = false;
     }
 

@@ -8,7 +8,7 @@ public final class Tile {
     static final int WIDTH = 120;
     static final int HEIGHT = 120;
 
-    private Owner owner = new Owner();
+    private Owner owner = Owner.EMPTY;
     private boolean captured = false;
 
     Tile(int _x, int _y, TicTacToe _game) {
@@ -21,7 +21,7 @@ public final class Tile {
     }
 
     public void capture(Owner newOwner) {
-        if (!captured && owner.ownerType == OwnerType.EMPTY) {
+        if (!captured && owner == Owner.EMPTY) {
             captured = true;
             owner = newOwner;
         }
@@ -35,16 +35,16 @@ public final class Tile {
         // System.out.printf("Drawing a tile at x:%d y:%d \nThe owner is %s and it's
         // color is %s\n", getX(), getY(), getOwner().name(),
         // getOwner().getColor().toString());
-        g.setColor(owner.getColor());
+        g.setColor(OwnerHelper.getColor(owner));
         g.fillRect(x, y, WIDTH, HEIGHT);
-        g.setColor(owner.getTextColor());
+        g.setColor(OwnerHelper.getTextColor(owner));
         int calcX = (x + WIDTH / 2) - (TicTacToe.FONT_SIZE / 3);
         int calcY = (y + HEIGHT / 2) + (TicTacToe.FONT_SIZE / 3);
-        g.drawString(owner.getText(), calcX, calcY);
+        g.drawString(OwnerHelper.GetText(owner), calcX, calcY);
     }
 
     void reset() { // Used to reset this Tile after the game is over.
-        owner.ownerType = OwnerType.EMPTY;
+        owner = Owner.EMPTY;
         captured = false;
     }
 

@@ -1,0 +1,6 @@
+/**
+ * TicTacToeData
+ */
+public class TicTacToeData {
+
+}

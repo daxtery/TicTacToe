@@ -1,9 +1,16 @@
-import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 public final class TicTacToe {
 
@@ -29,7 +36,6 @@ public final class TicTacToe {
     private int playerTurn = 0;
 
     private boolean ai = false;
-    private boolean aiTurn = false;
     private AI theAI;
     private static final String pcName = "PC";
 
@@ -49,7 +55,7 @@ public final class TicTacToe {
     public static void main(String[] args) {
         // TicTacToe t = new TicTacToe();
         // t.newGame();
-        TicTacToe t = new TicTacToe(1);
+        new TicTacToe(1);
     }
 
     private void waysToWin() {

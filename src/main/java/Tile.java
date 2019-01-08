@@ -2,8 +2,6 @@ import java.awt.*;
 
 public final class Tile {
 
-    private TicTacToe game;
-
     private int x;
     private int y;
 
@@ -16,7 +14,6 @@ public final class Tile {
     Tile(int _x, int _y, TicTacToe _game) {
         x = _x + TicTacToe.BORDER;
         y = _y + TicTacToe.BORDER;
-        game = _game;
     }
 
     public boolean isCaptured() {

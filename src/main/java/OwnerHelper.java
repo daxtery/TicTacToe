@@ -1,11 +1,12 @@
 import java.awt.Color;
+import models.Type;
 
 /**
  * OwnerHelper
  */
 final class OwnerHelper {
 
-    static String GetText(final Owner owner) {
+    static String GetText(final Type owner) {
         switch (owner) {
         case X:
             return "X";
@@ -16,7 +17,7 @@ final class OwnerHelper {
         }
     }
 
-    static Color getColor(final Owner owner) {
+    static Color getColor(final Type owner) {
         switch (owner) {
         // case X:
         // return Color.LIGHT_GRAY;
@@ -27,7 +28,7 @@ final class OwnerHelper {
         }
     }
 
-    static Color getTextColor(final Owner owner) {
+    static Color getTextColor(final Type owner) {
         switch (owner) {
         case X:
             return Color.BLACK;

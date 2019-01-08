@@ -1,5 +1,7 @@
 import java.awt.*;
 
+import models.Type;
+
 public final class Tile {
 
     private int x;
@@ -8,7 +10,7 @@ public final class Tile {
     static final int WIDTH = 120;
     static final int HEIGHT = 120;
 
-    private Owner owner = Owner.EMPTY;
+    private Type owner = Type.EMPTY;
     private boolean captured = false;
 
     Tile(int _x, int _y, TicTacToe _game) {
@@ -20,14 +22,14 @@ public final class Tile {
         return captured;
     }
 
-    public void capture(Owner newOwner) {
-        if (!captured && owner == Owner.EMPTY) {
+    public void capture(Type newOwner) {
+        if (!captured && owner == Type.EMPTY) {
             captured = true;
             owner = newOwner;
         }
     }
 
-    public Owner getOwner() {
+    public Type getOwner() {
         return owner;
     }
 
@@ -44,7 +46,7 @@ public final class Tile {
     }
 
     void reset() { // Used to reset this Tile after the game is over.
-        owner = Owner.EMPTY;
+        owner = Type.EMPTY;
         captured = false;
     }
 

@@ -12,6 +12,8 @@ import javax.swing.WindowConstants;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import models.Type;
+
 public final class TicTacToe {
 
     // WINDOW
@@ -32,7 +34,7 @@ public final class TicTacToe {
     private int p2Wins = 0;
     private int p1Wins = 0;
 
-    private Owner currentPlayer = Owner.X;
+    private Type currentPlayer = Type.X;
     private int playerTurn = 0;
 
     private boolean ai = false;
@@ -261,8 +263,8 @@ public final class TicTacToe {
         return p2;
     }
 
-    private void sendWin(Owner currentPlayer) {
-        if (currentPlayer == Owner.O) {
+    private void sendWin(Type currentPlayer) {
+        if (currentPlayer == Type.O) {
             p2Wins++;
         } else {
             p1Wins++;
@@ -277,7 +279,7 @@ public final class TicTacToe {
         newGame();
     }
 
-    private boolean won(Owner currentPlayer) {
+    private boolean won(Type currentPlayer) {
         // System.out.println();
         // System.out.println("NEW MOVE");
         int[] captures = capturedTilesFor(currentPlayer);
@@ -303,7 +305,7 @@ public final class TicTacToe {
         return true;
     }
 
-    private int[] capturedTilesFor(Owner player) {
+    private int[] capturedTilesFor(Type player) {
         int[] captures = new int[COLUMNS * LINES];
         int i = 0;
         for (Tile t : tileArray) {
@@ -338,7 +340,7 @@ public final class TicTacToe {
     }
 
     private void nextTurn() {
-        currentPlayer = Owner.O;
+        currentPlayer = Type.O;
         if (playerTurn == 0) {
             playerTurn++;
             if (ai) {

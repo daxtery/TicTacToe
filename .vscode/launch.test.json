@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "TicTacToe",
+                "projectName": "TicTacToe",
+                "workingDirectory": "c:\\Programming\\TicTacToe",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "TicTacToe",
+                "projectName": "TicTacToe",
+                "workingDirectory": "c:\\Programming\\TicTacToe",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}

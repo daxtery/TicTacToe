@@ -4,9 +4,6 @@ public final class Tile {
 
     private Type owner = Type.EMPTY;
 
-    public Tile() {
-    }
-
     public boolean isCaptured() {
         return owner != Type.EMPTY;
     }

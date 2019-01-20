@@ -48,26 +48,7 @@ public final class TicTacToe {
     private static final int COLUMNS = 3;
     private static final int LINES = 3;
 
-    private Type currentPlayer = Type.X;
-    private int playerTurn = 0;
-
-    private boolean ai = false;
-    // private AI theAI;
-
     private Tile[] tileArray = new Tile[COLUMNS * LINES];
-
-    // private void newAIGame() {
-    // resetTiles();
-    // if (playerTurn == 1) {
-    // theAI.play();
-    // }
-    // if (!p2.equalsIgnoreCase(pcName)) {
-    // p1Wins = 0;
-    // p2Wins = 0;
-    // p2 = "PC";
-    // }
-    // GAME_FRAME.repaint();
-    // }
 
     public TicTacToe() {
         for (int i = 0; i < tileArray.length; i++) {
@@ -79,9 +60,8 @@ public final class TicTacToe {
         return tileArray;
     }
 
-    private void reset() {
-        for (Tile t : tileArray)
-            t.reset();
+    Tile getTileAt(int index) {
+        return tileArray[index];
     }
 
     public boolean won(Type currentPlayer) {
@@ -112,35 +92,6 @@ public final class TicTacToe {
         tileArray[index].set(newOwner);
     }
 
-    // private boolean winningArray(int[] have, int[] need) {
-    // // System.out.println();
-    // // System.out.println("NEW ARRAY");
-    // for (int i = 0; i < have.length; i++) {
-    // int hav = have[i];
-    // int ned = need[i];
-    // // System.out.println("Board: " + hav + " == " + "Needed: " + ned );
-    // if (ned == 1 && hav == 0) {
-    // return false;
-    // }
-    // }
-    // return true;
-    // }
-
-    private int[] capturedTilesFor(Type player) {
-        int[] captures = new int[COLUMNS * LINES];
-        int i = 0;
-        for (Tile t : tileArray) {
-            if (t.getOwner() == player) {
-                captures[i] = 1;
-            }
-            i++;
-        }
-        // for (int ii : captures){
-        // System.out.println(ii);
-        // }
-        return captures;
-    }
-
     private boolean allFull() {
         for (Tile t : tileArray) {
             if (!t.isCaptured()) {
@@ -149,16 +100,4 @@ public final class TicTacToe {
         }
         return true;
     }
-
-    // private void nextTurn() {
-    // currentPlayer = Type.O;
-    // if (playerTurn == 0) {
-    // playerTurn++;
-    // if (ai) {
-    // theAI.play();
-    // }
-    // } else {
-    // playerTurn = 0;
-    // }
-    // }
 }

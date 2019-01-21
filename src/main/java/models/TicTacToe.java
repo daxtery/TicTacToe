@@ -48,6 +48,8 @@ public final class TicTacToe {
     private static final int COLUMNS = 3;
     private static final int LINES = 3;
 
+    public static final int SIZE = COLUMNS * LINES;
+
     private Tile[] tileArray = new Tile[COLUMNS * LINES];
 
     public TicTacToe() {

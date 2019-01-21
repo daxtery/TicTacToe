@@ -3,7 +3,7 @@ package models;
 public enum Type {
     X, O, EMPTY;
 
-    Type GetOpposite() {
+    public Type getOpposite() {
         switch (this) {
         case X:
             return Type.O;

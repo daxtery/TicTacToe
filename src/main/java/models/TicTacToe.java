@@ -77,7 +77,7 @@ public final class TicTacToe {
 
             for (int w = waysSize - 1; w >= 0; w--) {
                 if (restOfWaysToWin.get(w)[i] == 1) {
-                    if (lookingFor != tileArray[i].getOwner().ordinal()) {
+                    if (lookingFor != tileArray[i].getType().ordinal()) {
                         restOfWaysToWin.remove(w);
                     }
                 }
@@ -90,8 +90,8 @@ public final class TicTacToe {
         return true;
     }
 
-    public void set(int index, Type newOwner) {
-        tileArray[index].set(newOwner);
+    public void set(int index, Type newType) {
+        tileArray[index].setType(newType);
     }
 
     public boolean allFull() {

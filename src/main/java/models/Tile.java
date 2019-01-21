@@ -2,28 +2,30 @@ package models;
 
 public final class Tile {
 
-    private Type owner = Type.EMPTY;
+    private Type type;
+
+    public Tile() {
+        this(Type.EMPTY);
+    }
+
+    public Tile(Type type) {
+        this.type = type;
+    }
 
     public boolean isCaptured() {
-        return owner != Type.EMPTY;
+        return type != Type.EMPTY;
     }
 
-    public void set(Type newOwner) {
-
-        if (isCaptured()) {
-            System.err.println(this + "is already occupied by " + owner);
-            return;
-        }
-
-        owner = newOwner;
+    public void setType(Type newtype) {
+        type = newtype;
     }
 
-    public Type getOwner() {
-        return owner;
+    public Type getType() {
+        return type;
     }
 
-    void reset() {
-        owner = Type.EMPTY;
+    void resetType() {
+        type = Type.EMPTY;
     }
 
 }

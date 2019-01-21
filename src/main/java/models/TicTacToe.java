@@ -8,7 +8,9 @@ import java.util.List;;
  */
 public final class TicTacToe {
 
-    private static List<int[]> possible_wins = new ArrayList<>() {
+    private static final List<int[]> POSSIBLE_WINS = new ArrayList<>() {
+        private static final long serialVersionUID = 1655370451954117204L;
+
         {
             add(new int[] { //
                     1, 0, 0, //
@@ -69,7 +71,7 @@ public final class TicTacToe {
     public boolean won(Type currentPlayer) {
 
         int lookingFor = currentPlayer.ordinal();
-        List<int[]> restOfWaysToWin = new ArrayList<>(possible_wins);
+        List<int[]> restOfWaysToWin = new ArrayList<>(POSSIBLE_WINS);
 
         for (int i = 0; i < tileArray.length; i++) {
 
@@ -101,6 +103,20 @@ public final class TicTacToe {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < SIZE; i++) {
+            s += tileArray[i].getType().toString();
+            if ((i + 1) % COLUMNS == 0) {
+                s += "\n";
+            } else {
+                s += " ";
+            }
+        }
+        return s.toString();
     }
 
 }

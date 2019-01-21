@@ -68,7 +68,7 @@ public final class TicTacToe {
         return tileArray[index];
     }
 
-    public boolean won(Type currentPlayer) {
+    public boolean won(Player currentPlayer) {
 
         int lookingFor = currentPlayer.ordinal();
         List<int[]> restOfWaysToWin = new ArrayList<>(POSSIBLE_WINS);
@@ -79,7 +79,7 @@ public final class TicTacToe {
 
             for (int w = waysSize - 1; w >= 0; w--) {
                 if (restOfWaysToWin.get(w)[i] == 1) {
-                    if (lookingFor != tileArray[i].getType().ordinal()) {
+                    if (lookingFor != tileArray[i].getPlayer().ordinal()) {
                         restOfWaysToWin.remove(w);
                     }
                 }
@@ -92,8 +92,8 @@ public final class TicTacToe {
         return true;
     }
 
-    public void set(int index, Type newType) {
-        tileArray[index].setType(newType);
+    public void set(int index, Player newType) {
+        tileArray[index].setPlayer(newType);
     }
 
     public boolean allFull() {
@@ -109,7 +109,7 @@ public final class TicTacToe {
     public String toString() {
         String s = "";
         for (int i = 0; i < SIZE; i++) {
-            s += tileArray[i].getType().toString();
+            s += tileArray[i].getPlayer().toString();
             if ((i + 1) % COLUMNS == 0) {
                 s += "\n";
             } else {

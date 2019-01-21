@@ -2,25 +2,25 @@ package models;
 
 public final class Tile {
 
-    private Type type;
+    private Player type;
 
     public Tile() {
-        this(Type.E);
+        this(Player.E);
     }
 
-    public Tile(Type type) {
+    public Tile(Player type) {
         this.type = type;
     }
 
     public boolean isCaptured() {
-        return type != Type.E;
+        return type != Player.E;
     }
 
-    public void setType(Type newtype) {
+    public void setPlayer(Player newtype) {
         type = newtype;
     }
 
-    public Type getType() {
+    public Player getPlayer() {
         return type;
     }
 

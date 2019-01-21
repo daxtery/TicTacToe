@@ -1,13 +1,13 @@
 import java.awt.Color;
-import models.Type;
+import models.Player;
 
 /**
  * OwnerHelper
  */
-final class OwnerHelper {
+public final class PlayerUI {
 
-    static String GetText(final Type owner) {
-        switch (owner) {
+    static String getText(final Player player) {
+        switch (player) {
         case X:
             return "X";
         case O:
@@ -17,8 +17,8 @@ final class OwnerHelper {
         }
     }
 
-    static Color getColor(final Type owner) {
-        switch (owner) {
+    static Color getColor(final Player player) {
+        switch (player) {
         // case X:
         // return Color.LIGHT_GRAY;
         // case O:
@@ -28,8 +28,8 @@ final class OwnerHelper {
         }
     }
 
-    static Color getTextColor(final Type owner) {
-        switch (owner) {
+    static Color getTextColor(final Player player) {
+        switch (player) {
         case X:
             return Color.BLACK;
         case O:
@@ -39,7 +39,7 @@ final class OwnerHelper {
         }
     }
 
-    private OwnerHelper() {
+    private PlayerUI() {
 
     }
 

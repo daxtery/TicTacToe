@@ -22,7 +22,7 @@ public final class AI {
 
     }
 
-    public static int getBestMove(TicTacToe currentBoard, Type player) {
+    public static int getBestMove(TicTacToe currentBoard, Player player) {
         ArrayList<AIMove> possible = new ArrayList<AIMove>(TicTacToe.SIZE);
         getBestMove(currentBoard, player, possible);
 
@@ -39,7 +39,7 @@ public final class AI {
         return possible.get(new Random().nextInt(count)).index;
     }
 
-    private static int getBestMove(TicTacToe currentBoard, Type player, List<AIMove> possibleMoves) {
+    private static int getBestMove(TicTacToe currentBoard, Player player, List<AIMove> possibleMoves) {
         if (currentBoard.won(player))
             return 1;
 
@@ -51,7 +51,7 @@ public final class AI {
 
         for (int i = 0; i < TicTacToe.SIZE; i++) {
             Tile t = currentBoard.get(i);
-            Type type = t.getType();
+            Player type = t.getPlayer();
             if (!t.isCaptured()) {
                 currentBoard.set(i, player);
                 int score = -getBestMove(currentBoard, player.getOpposite(), new ArrayList<AIMove>());

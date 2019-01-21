@@ -56,11 +56,11 @@ public final class TicTacToe {
         }
     }
 
-    Tile[] getTiles() {
+    public Tile[] getTiles() {
         return tileArray;
     }
 
-    Tile getTileAt(int index) {
+    public Tile get(int index) {
         return tileArray[index];
     }
 
@@ -92,7 +92,7 @@ public final class TicTacToe {
         tileArray[index].set(newOwner);
     }
 
-    private boolean allFull() {
+    public boolean allFull() {
         for (Tile t : tileArray) {
             if (!t.isCaptured()) {
                 return false;
@@ -100,4 +100,5 @@ public final class TicTacToe {
         }
         return true;
     }
+
 }

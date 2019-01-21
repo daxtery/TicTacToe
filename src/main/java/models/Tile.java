@@ -5,7 +5,7 @@ public final class Tile {
     private Type type;
 
     public Tile() {
-        this(Type.EMPTY);
+        this(Type.E);
     }
 
     public Tile(Type type) {
@@ -13,7 +13,7 @@ public final class Tile {
     }
 
     public boolean isCaptured() {
-        return type != Type.EMPTY;
+        return type != Type.E;
     }
 
     public void setType(Type newtype) {
@@ -22,10 +22,6 @@ public final class Tile {
 
     public Type getType() {
         return type;
-    }
-
-    void resetType() {
-        type = Type.EMPTY;
     }
 
 }

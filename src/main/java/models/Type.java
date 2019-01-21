@@ -1,7 +1,7 @@
 package models;
 
 public enum Type {
-    X, O, EMPTY;
+    X, O, E;
 
     public Type getOpposite() {
         switch (this) {
@@ -10,7 +10,7 @@ public enum Type {
         case O:
             return Type.X;
         default:
-            return Type.EMPTY;
+            return Type.E;
         }
     }
 }

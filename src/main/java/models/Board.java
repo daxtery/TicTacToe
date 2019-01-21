@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;;
 
 /**
- * TicTacToe
+ * Board
  */
-public final class TicTacToe {
+public final class Board {
 
     private static final List<int[]> POSSIBLE_WINS = new ArrayList<>() {
         private static final long serialVersionUID = 1655370451954117204L;
@@ -47,14 +47,14 @@ public final class TicTacToe {
         }
     };
 
-    private static final int COLUMNS = 3;
-    private static final int LINES = 3;
+    public static final int COLUMNS = 3;
+    public static final int LINES = 3;
 
     public static final int SIZE = COLUMNS * LINES;
 
     private Tile[] tileArray = new Tile[COLUMNS * LINES];
 
-    public TicTacToe() {
+    public Board() {
         for (int i = 0; i < tileArray.length; i++) {
             tileArray[i] = new Tile();
         }
@@ -90,6 +90,35 @@ public final class TicTacToe {
         }
 
         return true;
+    }
+
+    public List<Integer> getWinConfiguration(Player currentPlayer) {
+        int lookingFor = currentPlayer.ordinal();
+        List<int[]> restOfWaysToWin = new ArrayList<>(POSSIBLE_WINS);
+
+        for (int i = 0; i < tileArray.length; i++) {
+
+            int waysSize = restOfWaysToWin.size();
+
+            for (int w = waysSize - 1; w >= 0; w--) {
+                if (restOfWaysToWin.get(w)[i] == 1) {
+                    if (lookingFor != tileArray[i].getPlayer().ordinal()) {
+                        restOfWaysToWin.remove(w);
+                    }
+                }
+            }
+
+            if (restOfWaysToWin.size() == 0)
+                return null;
+        }
+
+        List<Integer> win = new ArrayList<>(Board.SIZE);
+
+        for (int i = 0; i < restOfWaysToWin.get(0).length; i++) {
+            win.add(restOfWaysToWin.get(0)[i]);
+        }
+
+        return win;
     }
 
     public void set(int index, Player newType) {

@@ -1,15 +1,37 @@
+import java.util.Scanner;
+
 import logic.AI;
-import models.TicTacToe;
-import models.Type;
+import models.Board;
+import models.Player;
 
 /**
  * Main
  */
 public class Main {
 
+    static Player current = Player.O;
+    static Board board;
+
     public static void main(String[] args) {
-        TicTacToe n = new TicTacToe();
-        int j = AI.getBestMove(n, Type.O);
-        System.out.println(j);
+        board = new Board();
+        play();
     }
+
+    static void play() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (!board.allFull()) {
+            int j = AI.getBestMove(board, current);
+            board.set(j, current);
+            current = current.getOpposite();
+            System.out.println(board);
+            int index = scanner.nextInt();
+            board.set(index, current);
+            current = current.getOpposite();
+        }
+
+        scanner.close();
+    }
+
 }

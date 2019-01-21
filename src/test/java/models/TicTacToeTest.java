@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class TicTacToeTest {
 
-    TicTacToe tacToe;
+    Board tacToe;
 
     @Before
     public void setup() {
-        tacToe = new TicTacToe();
+        tacToe = new Board();
     }
 
     @Test

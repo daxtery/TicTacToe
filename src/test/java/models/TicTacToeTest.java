@@ -1,5 +1,8 @@
 package models;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +20,7 @@ public class TicTacToeTest {
         tacToe.set(0, Type.O);
         tacToe.set(1, Type.O);
         tacToe.set(2, Type.O);
-        assert tacToe.won(Type.O);
+        assertTrue(tacToe.won(Type.O));
     }
 
     @Test
@@ -25,7 +28,7 @@ public class TicTacToeTest {
         tacToe.set(0, Type.O);
         tacToe.set(1, Type.X);
         tacToe.set(2, Type.O);
-        assert !tacToe.won(Type.O);
+        assertFalse(tacToe.won(Type.O));
     }
 
     @Test
@@ -33,7 +36,7 @@ public class TicTacToeTest {
         tacToe.set(3, Type.O);
         tacToe.set(4, Type.O);
         tacToe.set(5, Type.O);
-        assert tacToe.won(Type.O);
+        assertTrue(tacToe.won(Type.O));
     }
 
     @Test
@@ -41,7 +44,7 @@ public class TicTacToeTest {
         tacToe.set(6, Type.O);
         tacToe.set(7, Type.O);
         tacToe.set(8, Type.O);
-        assert tacToe.won(Type.O);
+        assertTrue(tacToe.won(Type.O));
     }
 
     @Test
@@ -49,7 +52,7 @@ public class TicTacToeTest {
         tacToe.set(5, Type.O);
         tacToe.set(7, Type.O);
         tacToe.set(8, Type.O);
-        assert !tacToe.won(Type.O);
+        assertFalse(tacToe.won(Type.O));
     }
 
     @Test
@@ -57,7 +60,7 @@ public class TicTacToeTest {
         tacToe.set(5, Type.X);
         tacToe.set(7, Type.X);
         tacToe.set(8, Type.X);
-        assert !tacToe.won(Type.X);
+        assertFalse(tacToe.won(Type.X));
     }
 
     @Test
@@ -71,7 +74,7 @@ public class TicTacToeTest {
         tacToe.set(6, Type.O);
         tacToe.set(7, Type.X);
         tacToe.set(8, Type.O);
-        assert !tacToe.won(Type.X);
+        assertFalse(tacToe.won(Type.X));
     }
 
     @Test
@@ -85,7 +88,7 @@ public class TicTacToeTest {
         tacToe.set(6, Type.O);
         tacToe.set(7, Type.X);
         tacToe.set(8, Type.O);
-        assert !tacToe.won(Type.O);
+        assertFalse(tacToe.won(Type.O));
     }
 
     @Test
@@ -99,7 +102,7 @@ public class TicTacToeTest {
         tacToe.set(6, Type.O);
         tacToe.set(7, Type.X);
         tacToe.set(8, Type.O);
-        assert tacToe.won(Type.O);
+        assertTrue(tacToe.won(Type.O));
     }
 
     @Test
@@ -111,7 +114,7 @@ public class TicTacToeTest {
         tacToe.set(4, Type.O);
         tacToe.set(5, Type.X);
         tacToe.set(6, Type.O);
-        assert tacToe.won(Type.O);
+        assertTrue(tacToe.won(Type.O));
     }
 
 }

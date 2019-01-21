@@ -1,5 +1,15 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.format.settings.url": "eclipse-formatter.xml",
-    "java.dependency.packagePresentation": "hierarchical"
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.test.defaultConfig": "config-dcb1a7",
+    "java.test.config": [
+        {
+            "name": "config-dcb1a7",
+            "workingDirectory": "${workspaceFolder}",
+            "args": [],
+            "vmargs": [],
+            "env": {}
+        }
+    ]
 }

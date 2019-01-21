@@ -102,4 +102,16 @@ public class TicTacToeTest {
         assert tacToe.won(Type.O);
     }
 
+    @Test
+    public void OwinsOXOXOXO() {
+        tacToe.set(0, Type.O);
+        tacToe.set(1, Type.X);
+        tacToe.set(2, Type.O);
+        tacToe.set(3, Type.X);
+        tacToe.set(4, Type.O);
+        tacToe.set(5, Type.X);
+        tacToe.set(6, Type.O);
+        assert tacToe.won(Type.O);
+    }
+
 }

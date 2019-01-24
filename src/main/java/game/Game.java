@@ -11,9 +11,11 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.AI;
 import models.Board;
 import models.Player;
 import ui.GameUI;
@@ -23,6 +25,8 @@ public class Game extends Application {
 
     private Player current;
     private Board board;
+    private boolean vsAI = true;
+
     private List<TileUI> tiles;
     private Pane root;
     private boolean canPlay;
@@ -55,12 +59,21 @@ public class Game extends Application {
             return;
         int index = tiles.indexOf(tile);
         if (canPlayIn(index)) {
-            board.set(index, current);
-            tile.draw(GameUI.getText(current), GameUI.getTextColor(current));
+            playIn(index);
 
-            if (!checkState()) {
-                current = current.getOpposite();
+            if (vsAI) {
+                int aiMove = AI.getBestMove(board, current);
+                playIn(aiMove);
             }
+        }
+    }
+
+    private void playIn(int index) {
+        board.set(index, current);
+        tiles.get(index).draw(GameUI.getText(current), GameUI.getTextColor(current));
+        checkState();
+        current = current.getOpposite();
+    }
 
     private void reset() {
         for (TileUI t : tiles) {

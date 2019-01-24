@@ -60,10 +60,6 @@ public final class Board {
         }
     }
 
-    public Tile[] getTiles() {
-        return tileArray;
-    }
-
     public Tile get(int index) {
         return tileArray[index];
     }

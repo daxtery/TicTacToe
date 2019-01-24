@@ -156,7 +156,7 @@ public class Game extends Application {
         timeline.play();
         timeline.setOnFinished((event) -> {
             root.getChildren().remove(line);
-            OnGameEnd();
+            Platform.runLater(() -> OnGameEnd());
         });
     }
 

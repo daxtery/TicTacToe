@@ -144,4 +144,10 @@ public final class Board {
         return s.toString();
     }
 
+    public void reset() {
+        for (Tile t : tileArray) {
+            t.reset();
+        }
+    }
+
 }

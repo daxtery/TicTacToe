@@ -46,10 +46,6 @@ public class Game extends Application {
         return root;
     }
 
-    private Player getCurrentPlayer() {
-        return current;
-    }
-
     private boolean canPlayIn(int index) {
         return !board.get(index).isCaptured();
     }

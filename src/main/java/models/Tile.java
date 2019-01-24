@@ -24,4 +24,8 @@ public final class Tile {
         return type;
     }
 
+    public void reset() {
+        this.type = Player.E;
+    }
+
 }

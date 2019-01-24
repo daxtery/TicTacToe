@@ -1,7 +1,6 @@
 package ui;
 
 import game.Game;
-import javafx.geometry.Pos;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -14,13 +13,12 @@ public final class TileUI extends StackPane {
     private Text text;
     private Rectangle border;
 
-    public TileUI(int width, int height, double translateX, double translateY, Color strokeColor, int fontSize,
+    public TileUI(double width, double height, double translateX, double translateY, Color strokeColor, int fontSize,
             Game game) {
 
         border = new Rectangle(width, height);
         border.setFill(null);
         border.setStroke(strokeColor);
-        setAlignment(Pos.CENTER);
 
         text = new Text();
         text.setFont(Font.font(fontSize));

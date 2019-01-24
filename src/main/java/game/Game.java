@@ -8,11 +8,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.AI;
@@ -34,12 +36,21 @@ public class Game extends Application {
     private Parent createContent() {
 
         root = new Pane();
-        root.setPrefSize(GameUI.PREFERED_WIDTH, GameUI.PREFERED_HEIGHT);
+
+        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        double tile_width = width / 3.01;
+        double tile_height = height / 3.01;
+        int fontSize = (int) Math.round(tile_height * 0.9);
+
+        root.setPrefSize(width, height);
 
         for (int i = 0; i < Board.LINES; i++) {
             for (int j = 0; j < Board.COLUMNS; j++) {
-                TileUI tile = new TileUI(GameUI.TILE_WIDTH, GameUI.TILE_HEIGHT, j * GameUI.TILE_WIDTH,
-                        i * GameUI.TILE_HEIGHT, GameUI.TILE_STROKE_COLOR, GameUI.TILE_FONT_SIZE, this);
+                TileUI tile = new TileUI(tile_width, tile_height, j * tile_width, i * tile_height,
+                        GameUI.TILE_STROKE_COLOR, fontSize, this);
 
                 tiles.add(i * Board.LINES + j, tile);
 

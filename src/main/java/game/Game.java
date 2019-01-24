@@ -11,6 +11,9 @@ import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -57,6 +60,23 @@ public class Game extends Application {
                 root.getChildren().addAll(tile);
             }
         }
+
+        Menu playMenu = new Menu("Play");
+        MenuItem vsAiMenuItem = new MenuItem("VS AI");
+        vsAiMenuItem.setOnAction((event) -> {
+            vsAI = true;
+            reset();
+        });
+        MenuItem vsHumanMenuItem = new MenuItem("VS Human");
+        vsHumanMenuItem.setOnAction((event) -> {
+            vsAI = false;
+            reset();
+        });
+        playMenu.getItems().addAll(vsAiMenuItem, vsHumanMenuItem);
+
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(playMenu);
+        root.getChildren().add(menuBar);
 
         return root;
     }

@@ -25,6 +25,7 @@ public class Game extends Application {
     private Board board;
     private List<TileUI> tiles;
     private Pane root;
+    private boolean canPlay;
 
     private Parent createContent() {
 
@@ -54,6 +55,8 @@ public class Game extends Application {
     }
 
     public void OnClickedTile(TileUI tile) {
+        if (!canPlay)
+            return;
         int index = tiles.indexOf(tile);
         if (canPlayIn(index)) {
             board.set(index, current);
@@ -63,19 +66,23 @@ public class Game extends Application {
                 current = current.getOpposite();
             }
 
+    private void reset() {
+        for (TileUI t : tiles) {
+            t.draw("", Color.TRANSPARENT);
         }
+
+        canPlay = true;
+
+        board.reset();
     }
 
-    private boolean checkState() {
+    private void checkState() {
         if (board.won(current)) {
             List<Integer> winningway = board.getWinConfiguration(current);
             playWinAnnimation(winningway);
-            return true;
         } else if (board.allFull()) {
-            // draw
-            return true;
+            reset();
         }
-        return false;
     }
 
     private void playWinAnnimation(List<Integer> winningWay) {
@@ -93,18 +100,25 @@ public class Game extends Application {
 
         root.getChildren().addAll(line);
 
+        canPlay = false;
+
         Timeline timeline = new Timeline();
         timeline.getKeyFrames()
                 .add(new KeyFrame(Duration.seconds(1.2), new KeyValue(line.endXProperty(), last.getCenterX()),
                         new KeyValue(line.endYProperty(), last.getCenterY())));
 
         timeline.play();
+        timeline.setOnFinished((event) -> {
+            reset();
+            root.getChildren().remove(line);
+        });
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         current = new Random().nextInt(100) > 50 ? Player.O : Player.X;
         board = new Board();
+        canPlay = true;
         tiles = new ArrayList<TileUI>(Board.SIZE);
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.setMaximized(true);

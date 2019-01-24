@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
 public final class TileUI extends StackPane {
 
     private Text text;
-    private Game game;
     private Rectangle border;
 
     public TileUI(int width, int height, double translateX, double translateY, Color strokeColor, int fontSize,
@@ -30,8 +29,6 @@ public final class TileUI extends StackPane {
 
         setTranslateX(translateX);
         setTranslateY(translateY);
-
-        this.game = game;
 
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {

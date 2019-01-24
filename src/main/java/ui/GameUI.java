@@ -11,7 +11,7 @@ public final class GameUI {
 
     public static final int TILE_WIDTH = PREFERED_WIDTH / Board.LINES;
     public static final int TILE_HEIGHT = PREFERED_HEIGHT / Board.COLUMNS - 30;
-    public static final int TILE_FONT_SIZE = 100;
+    public static final int TILE_FONT_SIZE = (int) (TILE_HEIGHT - TILE_HEIGHT / 10);
 
     public static final Color TILE_STROKE_COLOR = Color.BLACK;
 

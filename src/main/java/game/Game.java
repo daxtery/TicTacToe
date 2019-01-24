@@ -98,7 +98,7 @@ public class Game extends Application {
         if (canPlayIn(index)) {
             playIn(index);
 
-            if (vsAI) {
+            if (canPlay && vsAI) {
                 int aiMove = AI.getBestMove(board, current);
                 playIn(aiMove);
             }
@@ -126,6 +126,7 @@ public class Game extends Application {
         if (board.won(current)) {
             List<Integer> winningway = board.getWinConfiguration(current);
             playWinAnnimation(winningway);
+            canPlay = false;
         } else if (board.allFull()) {
             OnGameEnd();
         }
@@ -145,8 +146,6 @@ public class Game extends Application {
         line.setEndY(first.getCenterY());
 
         root.getChildren().addAll(line);
-
-        canPlay = false;
 
         Timeline timeline = new Timeline();
         timeline.getKeyFrames()

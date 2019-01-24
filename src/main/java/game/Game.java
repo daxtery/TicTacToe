@@ -2,18 +2,24 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -121,7 +127,7 @@ public class Game extends Application {
             List<Integer> winningway = board.getWinConfiguration(current);
             playWinAnnimation(winningway);
         } else if (board.allFull()) {
-            reset();
+            OnGameEnd();
         }
     }
 
@@ -149,9 +155,33 @@ public class Game extends Application {
 
         timeline.play();
         timeline.setOnFinished((event) -> {
-            reset();
             root.getChildren().remove(line);
+            OnGameEnd();
         });
+    }
+
+    public void OnGameEnd() {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Play again?");
+        alert.setHeaderText("Do you want to play again?");
+        alert.setContentText("Choose what to play next(or not)");
+
+        ButtonType buttonTypeOne = new ButtonType("VS AI");
+        ButtonType buttonTypeTwo = new ButtonType("VS Human");
+        ButtonType buttonTypeThree = new ButtonType("Quit", ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne) {
+            vsAI = true;
+            reset();
+        } else if (result.get() == buttonTypeTwo) {
+            vsAI = false;
+            reset();
+        } else {
+            Platform.exit();
+        }
     }
 
     @Override

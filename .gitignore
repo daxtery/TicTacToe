@@ -1,8 +1,4 @@
 .idea/
-TicTacToe.iml
-
-# Compiled class file
-*.class
 
 # Log file
 *.log
@@ -27,5 +23,9 @@ hs_err_pid*
 .classpath
 .project
 .settings/
+
+classes/
+
+*.iml
 
 target/

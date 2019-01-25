@@ -19,40 +19,6 @@
             <artifactId>logic</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>12-ea+9</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>12-ea+9</version>
-            <type>pom</type>
-        </dependency>
-
     </dependencies>
-
-    <build>
-        <plugins>
-         <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>daxtery.gui.Game</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     
 </project>

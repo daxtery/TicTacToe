@@ -1,4 +1,4 @@
-package models;
+package daxtery.logic;
 
 public enum Player {
     X, O, E;

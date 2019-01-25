@@ -1,14 +1,14 @@
-package models;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+package daxtery.logic;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 public class TicTacToeTest {
 
-    Board tacToe;
+    private Board tacToe;
 
     @Before
     public void setup() {

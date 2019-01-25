@@ -1,12 +1,3 @@
 {
-    "java.test.defaultConfig": "config-dcb1a7",
-    "java.test.config": [
-        {
-            "name": "config-dcb1a7",
-            "workingDirectory": "${workspaceFolder}",
-            "args": [],
-            "vmargs": [],
-            "env": {}
-        }
-    ]
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

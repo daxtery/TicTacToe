@@ -1,17 +1,17 @@
-package game;
+package daxtery.gui;
 
 import java.util.List;
 
 /**
  * Helper
  */
-public class Helper {
+class Helper {
 
     private Helper() {
 
     }
 
-    public static int[] indexesOfWin(List<Integer> winningArray) {
+    static int[] indexesOfWin(List<Integer> winningArray) {
 
         int[] indexes = new int[3];
         int current = 0;

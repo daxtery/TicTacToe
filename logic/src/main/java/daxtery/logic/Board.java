@@ -1,4 +1,4 @@
-package models;
+package daxtery.logic;
 
 import java.util.ArrayList;
 import java.util.List;;
@@ -123,7 +123,7 @@ public final class Board {
 
     public boolean allFull() {
         for (Tile t : tileArray) {
-            if (!t.isCaptured()) {
+            if (t.isFree()) {
                 return false;
             }
         }
@@ -141,7 +141,7 @@ public final class Board {
                 s += " ";
             }
         }
-        return s.toString();
+        return s;
     }
 
     public void reset() {

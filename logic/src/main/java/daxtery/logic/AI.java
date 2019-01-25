@@ -1,10 +1,8 @@
-package logic;
+package daxtery.logic;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import models.*;
 
 public final class AI {
 
@@ -23,7 +21,7 @@ public final class AI {
     }
 
     public static int getBestMove(Board currentBoard, Player player) {
-        ArrayList<AIMove> possible = new ArrayList<AIMove>(Board.SIZE);
+        ArrayList<AIMove> possible = new ArrayList<>(Board.SIZE);
         getBestMove(currentBoard, player, possible);
 
         possible.sort((a, b) -> Integer.compare(b.score, a.score));
@@ -52,12 +50,11 @@ public final class AI {
         for (int i = 0; i < Board.SIZE; i++) {
             Tile t = currentBoard.get(i);
             Player type = t.getPlayer();
-            if (!t.isCaptured()) {
+            if (t.isFree()) {
                 currentBoard.set(i, player);
-                int score = -getBestMove(currentBoard, player.getOpposite(), new ArrayList<AIMove>());
-                int index = i;
+                int score = -getBestMove(currentBoard, player.getOpposite(), new ArrayList<>());
 
-                possibleMoves.add(new AIMove(score, index));
+                possibleMoves.add(new AIMove(score, i));
             }
             currentBoard.set(i, type);
         }

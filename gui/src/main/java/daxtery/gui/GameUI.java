@@ -1,7 +1,7 @@
-package ui;
+package daxtery.gui;
 
+import daxtery.logic.Player;
 import javafx.scene.paint.Color;
-import models.Player;
 
 public final class GameUI {
 

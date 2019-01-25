@@ -1,10 +1,13 @@
-package game;
+package daxtery.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import daxtery.logic.AI;
+import daxtery.logic.Board;
+import daxtery.logic.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -26,11 +29,6 @@ import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import logic.AI;
-import models.Board;
-import models.Player;
-import ui.GameUI;
-import ui.TileUI;
 
 public class Game extends Application {
 
@@ -41,6 +39,10 @@ public class Game extends Application {
     private List<TileUI> tiles;
     private Pane root;
     private boolean canPlay;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     private Parent createContent() {
 
@@ -192,10 +194,6 @@ public class Game extends Application {
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.setMaximized(true);
         primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
 }

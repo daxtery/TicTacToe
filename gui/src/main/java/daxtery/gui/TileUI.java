@@ -1,6 +1,5 @@
-package ui;
+package daxtery.gui;
 
-import game.Game;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -8,13 +7,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public final class TileUI extends StackPane {
+final class TileUI extends StackPane {
 
     private Text text;
     private Rectangle border;
 
-    public TileUI(double width, double height, double translateX, double translateY, Color strokeColor, int fontSize,
-            Game game) {
+    TileUI(double width, double height, double translateX, double translateY, Color strokeColor, int fontSize,
+           Game game) {
 
         border = new Rectangle(width, height);
         border.setFill(null);
@@ -35,16 +34,16 @@ public final class TileUI extends StackPane {
         });
     }
 
-    public void draw(String newText, Color color) {
+    void draw(String newText, Color color) {
         text.setFill(color);
         text.setText(newText);
     }
 
-    public double getCenterX() {
+    double getCenterX() {
         return getTranslateX() + border.getWidth() / 2;
     }
 
-    public double getCenterY() {
+    double getCenterY() {
         return getTranslateY() + border.getHeight() / 2;
     }
 

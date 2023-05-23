@@ -1,6 +1,6 @@
 package daxtery.gui;
 
-import daxtery.logic.Player;
+import daxtery.logic.Mark;
 import javafx.scene.paint.Color;
 
 public final class GameUI {
@@ -10,8 +10,8 @@ public final class GameUI {
     private GameUI() {
     }
 
-    public static String getText(final Player player) {
-        switch (player) {
+    public static String getText(final Mark mark) {
+        switch (mark) {
         case X:
             return "X";
         case O:
@@ -21,8 +21,8 @@ public final class GameUI {
         }
     }
 
-    public static Color getTextColor(final Player player) {
-        switch (player) {
+    public static Color getTextColor(final Mark mark) {
+        switch (mark) {
         case X:
             return Color.BLACK;
         case O:

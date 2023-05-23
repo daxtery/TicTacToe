@@ -1,120 +1,54 @@
 package daxtery.logic;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.stream.Stream;
 
 public class TicTacToeTest {
 
-    private Board tacToe;
-
-    @Before
-    public void setup() {
-        tacToe = new Board();
+    private static Board fromString(Mark... marks) {
+        var board = new Board();
+        for (int i = 0; i < marks.length; i++) {
+            board.set(i, marks[i]);
+        }
+        return board;
     }
 
-    @Test
-    public void Owins111000000() {
-        tacToe.set(0, Player.O);
-        tacToe.set(1, Player.O);
-        tacToe.set(2, Player.O);
-        assertTrue(tacToe.won(Player.O));
+    private static Stream<Arguments> boardAndExpectedWinnerProvider() {
+        return Stream.of(
+                Arguments.of(fromString(Mark.O, Mark.O, Mark.O), Mark.O),
+                Arguments.of(fromString(null, null, null, Mark.O, Mark.O, Mark.O), Mark.O),
+                Arguments.of(fromString(null, null, null, null, null, null, Mark.O, Mark.O, Mark.O), Mark.O),
+                Arguments.of(fromString(Mark.O, Mark.O, Mark.X, Mark.O, Mark.X, Mark.O, Mark.O, Mark.O, Mark.X), Mark.O),
+                Arguments.of(fromString(Mark.O, Mark.X, Mark.O, Mark.X, Mark.O, Mark.X, Mark.O, null, null), Mark.O)
+        );
     }
 
-    @Test
-    public void Odoesntwin101000000() {
-        tacToe.set(0, Player.O);
-        tacToe.set(1, Player.X);
-        tacToe.set(2, Player.O);
-        assertFalse(tacToe.won(Player.O));
+    public static Stream<Arguments> boardAndExpectedLoserProvider() {
+        return Stream.of(
+                Arguments.of(fromString(Mark.O, Mark.X, Mark.O), Mark.O),
+                Arguments.of(fromString(null, null, null, Mark.O, Mark.X, Mark.O), Mark.O),
+                Arguments.of(fromString(null, null, null, null, null, null, Mark.O, Mark.X, Mark.O), Mark.O),
+                Arguments.of(fromString(null, null, null, null, null, Mark.O, null, Mark.O, Mark.O), Mark.O),
+                Arguments.of(fromString(null, null, null, null, null, Mark.X, null, Mark.X, Mark.X), Mark.X),
+                Arguments.of(fromString(Mark.X, Mark.O, Mark.X, Mark.O, Mark.X, Mark.O, Mark.O, Mark.X, Mark.O), Mark.X),
+                Arguments.of(fromString(Mark.X, Mark.O, Mark.X, Mark.O, Mark.X, Mark.O, Mark.O, Mark.X, Mark.O), Mark.O)
+        );
     }
 
-    @Test
-    public void Owins000111000() {
-        tacToe.set(3, Player.O);
-        tacToe.set(4, Player.O);
-        tacToe.set(5, Player.O);
-        assertTrue(tacToe.won(Player.O));
+    @ParameterizedTest
+    @MethodSource("boardAndExpectedWinnerProvider")
+    public void checkWins(Board board, Mark expected) {
+        Assertions.assertFalse(board.getWinningConfiguration(expected).isEmpty());
     }
 
-    @Test
-    public void Owins000000111() {
-        tacToe.set(6, Player.O);
-        tacToe.set(7, Player.O);
-        tacToe.set(8, Player.O);
-        assertTrue(tacToe.won(Player.O));
-    }
-
-    @Test
-    public void Odoesntwin000001011() {
-        tacToe.set(5, Player.O);
-        tacToe.set(7, Player.O);
-        tacToe.set(8, Player.O);
-        assertFalse(tacToe.won(Player.O));
-    }
-
-    @Test
-    public void Xdoesntwin000001011() {
-        tacToe.set(5, Player.X);
-        tacToe.set(7, Player.X);
-        tacToe.set(8, Player.X);
-        assertFalse(tacToe.won(Player.X));
-    }
-
-    @Test
-    public void XdoesntwinXOXOXOOXO() {
-        tacToe.set(0, Player.X);
-        tacToe.set(1, Player.O);
-        tacToe.set(2, Player.X);
-        tacToe.set(3, Player.O);
-        tacToe.set(4, Player.X);
-        tacToe.set(5, Player.O);
-        tacToe.set(6, Player.O);
-        tacToe.set(7, Player.X);
-        tacToe.set(8, Player.O);
-        assertFalse(tacToe.won(Player.X));
-    }
-
-    @Test
-    public void OdoesntwinXOXOXOOXO() {
-        tacToe.set(0, Player.X);
-        tacToe.set(1, Player.O);
-        tacToe.set(2, Player.X);
-        tacToe.set(3, Player.O);
-        tacToe.set(4, Player.X);
-        tacToe.set(5, Player.O);
-        tacToe.set(6, Player.O);
-        tacToe.set(7, Player.X);
-        tacToe.set(8, Player.O);
-        assertFalse(tacToe.won(Player.O));
-    }
-
-    @Test
-    public void OwinsOOXOXOOXO() {
-        tacToe.set(0, Player.O);
-        tacToe.set(1, Player.O);
-        tacToe.set(2, Player.X);
-        tacToe.set(3, Player.O);
-        tacToe.set(4, Player.X);
-        tacToe.set(5, Player.O);
-        tacToe.set(6, Player.O);
-        tacToe.set(7, Player.X);
-        tacToe.set(8, Player.O);
-        assertTrue(tacToe.won(Player.O));
-    }
-
-    @Test
-    public void OwinsOXOXOXO() {
-        tacToe.set(0, Player.O);
-        tacToe.set(1, Player.X);
-        tacToe.set(2, Player.O);
-        tacToe.set(3, Player.X);
-        tacToe.set(4, Player.O);
-        tacToe.set(5, Player.X);
-        tacToe.set(6, Player.O);
-        assertTrue(tacToe.won(Player.O));
+    @ParameterizedTest
+    @MethodSource("boardAndExpectedLoserProvider")
+    public void checkDoesNotWin(Board board, Mark mark) {
+        Assertions.assertTrue(board.getWinningConfiguration(mark).isEmpty());
     }
 
 }

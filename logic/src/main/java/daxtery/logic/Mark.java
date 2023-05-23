@@ -1,12 +1,12 @@
 package daxtery.logic;
 
-public enum Player {
+public enum Mark {
     X, O;
 
-    public Player getOpposite() {
+    public Mark getOpposite() {
         return switch (this) {
-            case X -> Player.O;
-            case O -> Player.X;
+            case X -> Mark.O;
+            case O -> Mark.X;
         };
     }
 }

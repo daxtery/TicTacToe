@@ -1,13 +1,8 @@
 package daxtery.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-
 import daxtery.logic.AI;
 import daxtery.logic.Board;
-import daxtery.logic.Player;
+import daxtery.logic.Mark;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,12 +12,12 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -30,9 +25,14 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+
 public class Game extends Application {
 
-    private Player current;
+    private Mark current;
     private Board board;
     private boolean vsAI = true;
 
@@ -90,7 +90,7 @@ public class Game extends Application {
     }
 
     private boolean canPlayIn(int index) {
-        return !board.get(index).isCaptured();
+        return board.get(index).isEmpty();
     }
 
     public void OnClickedTile(TileUI tile) {
@@ -101,8 +101,8 @@ public class Game extends Application {
             playIn(index);
 
             if (canPlay && vsAI) {
-                int aiMove = AI.getBestMove(board, current);
-                playIn(aiMove);
+                var aiMove = AI.getBestMove(board, current);
+                playIn(aiMove.index());
             }
         }
     }
@@ -125,22 +125,20 @@ public class Game extends Application {
     }
 
     private void checkState() {
-        if (board.won(current)) {
-            List<Integer> winningway = board.getWinConfiguration(current);
-            playWinAnnimation(winningway);
+        var result = board.getWinningConfiguration(current);
+        if (!result.isEmpty()) {
+            playWinningAnimation(result);
             canPlay = false;
         } else if (board.allFull()) {
             OnGameEnd();
         }
     }
 
-    private void playWinAnnimation(List<Integer> winningWay) {
+    private void playWinningAnimation(List<Integer> winningWay) {
         Line line = new Line();
 
-        int[] indexesOfWin = Helper.indexesOfWin(winningWay);
-
-        TileUI first = tiles.get(indexesOfWin[0]);
-        TileUI last = tiles.get(indexesOfWin[2]);
+        TileUI first = tiles.get(winningWay.get(0));
+        TileUI last = tiles.get(winningWay.get(2));
 
         line.setStartX(first.getCenterX());
         line.setStartY(first.getCenterY());
@@ -157,7 +155,7 @@ public class Game extends Application {
         timeline.play();
         timeline.setOnFinished((event) -> {
             root.getChildren().remove(line);
-            Platform.runLater(() -> OnGameEnd());
+            Platform.runLater(this::OnGameEnd);
         });
     }
 
@@ -174,23 +172,25 @@ public class Game extends Application {
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne) {
-            vsAI = true;
-            reset();
-        } else if (result.get() == buttonTypeTwo) {
-            vsAI = false;
-            reset();
-        } else {
-            Platform.exit();
+        if (result.isPresent()) {
+            if (result.get() == buttonTypeOne) {
+                vsAI = true;
+                reset();
+            } else if (result.get() == buttonTypeTwo) {
+                vsAI = false;
+                reset();
+            } else {
+                Platform.exit();
+            }
         }
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        current = new Random().nextInt(100) > 50 ? Player.O : Player.X;
+    public void start(Stage primaryStage) {
+        current = new Random().nextInt(100) > 50 ? Mark.O : Mark.X;
         board = new Board();
         canPlay = true;
-        tiles = new ArrayList<TileUI>(Board.SIZE);
+        tiles = new ArrayList<>(Board.SIZE);
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.setMaximized(true);
         primaryStage.show();
